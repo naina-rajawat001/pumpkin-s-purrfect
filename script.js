@@ -1,45 +1,46 @@
+import { catsData } from "/data.js";
 const emotionDiv = document.getElementById("emotion-radios")
-import { catsData } from "./data.js"
 
 
-
-function getEmotionsArray(cats){
-    const emotionsArray = []
-    for (let cat of cats){
-        for (let emotion of cat.emotionTags){
-            if (!emotionsArray.includes(emotion)){
-                emotionsArray.push(emotion)
+function eleminateEmotions(arr) {
+    let emotionArray = [];
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr[i].emotionTags.length; j++) {
+            if (!emotionArray.includes(arr[i].emotionTags[j])) {
+                emotionArray.push(arr[i].emotionTags[j])
             }
-           
         }
     }
-    return emotionsArray
+    return emotionArray
+
 }
 
-function renderEmotionsRadios(cats){
-    const emotions = getEmotionsArray(cats)
-    console.log(emotions)
-    let feedHtml = "";
-    for(let emotion of emotions) {
-
-       
-        feedHtml += `<div class = "radio">
-                        <label for="${emotion}">${emotion}</label>
-                        <input type="radio"
-                        id="${emotion}" 
-                        name = "radio-choice"
-                        value = "${emotion}">
-                    </div>`
-
-
+function renderEmotionsOnPage(arr) {
+    const emotions = eleminateEmotions(arr)
+    let htmlStr = ""
+    for (let i = 0; i < emotions.length; i++) { 
+        htmlStr += `<div class="radio">
+                                <label for="${emotions[i]}">${emotions[i]}</label>
+                                <input type="radio"
+                                        name="emotion"
+                                        value ="${emotions[i]}"
+                                        id="${emotions[i]}"
+                                        />
+                            </div>` 
     }
-    emotionDiv.innerHTML = feedHtml;
 
-
-   
+    emotionDiv.innerHTML = htmlStr;
 }
 
-renderEmotionsRadios(catsData);
+renderEmotionsOnPage(catsData);
+
+emotionDiv.addEventListener("change", highlightCheckedOption)
+
+function highlightCheckedOption(e) {
+    let previousId = e.target.id
+   document.getElementById(previousId).parentElement.classList.add("highlight");
+}
+
 
 
 

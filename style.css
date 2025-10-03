@@ -61,7 +61,7 @@ header{
     border-radius: 5px;
 }
 
-.radio{
+.radio {
     display: flex;
     align-items: center;
     border-bottom: 1px solid #bcbcbc;
