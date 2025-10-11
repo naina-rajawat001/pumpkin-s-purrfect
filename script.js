@@ -5,10 +5,10 @@ const emotionDiv = document.getElementById("emotion-radios")
 
 function eleminateEmotions(arr) {
     let emotionArray = [];
-    for (let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < arr[i].emotionTags.length; j++) {
-            if (!emotionArray.includes(arr[i].emotionTags[j])) {
-                emotionArray.push(arr[i].emotionTags[j])
+    for (let character of arr) {
+        for (let emotion of  character.emotionTags) {
+            if (!emotionArray.includes(emotion)) {
+                emotionArray.push(emotion)
             }
         }
     }
@@ -19,13 +19,13 @@ function eleminateEmotions(arr) {
 function renderEmotionsOnPage(arr) {
     const emotions = eleminateEmotions(arr)
     let htmlStr = ""
-    for (let i = 0; i < emotions.length; i++) { 
+    for (let char of emotions) { 
         htmlStr += `<div class="radio">
-                                <label for="${emotions[i]}">${emotions[i]}</label>
+                                <label for="${char}">${char}</label>
                                 <input type="radio"
                                         name="emotion"
-                                        value ="${emotions[i]}"
-                                        id="${emotions[i]}"
+                                        value ="${char}"
+                                        id="${char}"
                                         />
                             </div>` 
     }
@@ -51,8 +51,28 @@ getImgBtn.addEventListener("click", getMatchingCatsArray)
 
 function getMatchingCatsArray () {
     const selectedBtn = document.querySelector('input[type="radio"]:checked')
+    const isGif = document.getElementById("gifs-only-option").checked
+   if (selectedBtn) {
     console.log(selectedBtn.value)
+   }
+   else {
+    console.log("nothing is selected")
+   }
+   if (isGif) {
+        console.log("here is your gif")
+   }
+   else {
+        console.log("you don't have selected gif option ")
+   }
 }
+
+let sample = [1, 3, 34, 235,654, 76, 35, 66, 89]
+const passedsample = sample.filter((age) => {
+    let arrayitem = age >34
+    return arrayitem
+})
+
+
 
 
 
