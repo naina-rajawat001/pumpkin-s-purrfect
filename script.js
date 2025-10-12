@@ -50,20 +50,21 @@ getImgBtn.addEventListener("click", getMatchingCatsArray)
 
 
 function getMatchingCatsArray () {
-    const selectedBtn = document.querySelector('input[type="radio"]:checked')
-    const isGif = document.getElementById("gifs-only-option").checked
-   if (selectedBtn) {
-    console.log(selectedBtn.value)
-   }
-   else {
-    console.log("nothing is selected")
-   }
-   if (isGif) {
-        console.log("here is your gif")
-   }
-   else {
-        console.log("you don't have selected gif option ")
-   }
+    if (document.querySelector('input[type="radio"]:checked')) {
+        const selectedBtn = document.querySelector('input[type="radio"]:checked')
+        const isGif = document.getElementById("gifs-only-option").checked
+        const getSelectedEmotionArray = catsData.filter((cat) => {
+            if (isGif){
+                return cat.emotionTags.includes(selectedBtn.value) && cat.isGif
+            }
+            else {
+                return cat.emotionTags.includes(selectedBtn.value)
+            }
+        })
+        return getSelectedEmotionArray
+    }
+    console.log(getSelectedEmotionArray)
+
 }
 
 let sample = [1, 3, 34, 235,654, 76, 35, 66, 89]
@@ -71,7 +72,6 @@ const passedsample = sample.filter((age) => {
     let arrayitem = age >34
     return arrayitem
 })
-
 
 
 
