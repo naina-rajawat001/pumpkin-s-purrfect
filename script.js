@@ -1,7 +1,7 @@
 import { catsData } from "/data.js";
 const getImgBtn = document.getElementById("get-image-btn")
 const emotionDiv = document.getElementById("emotion-radios")
-
+const memeInner = document.getElementById("meme-modal-inner");
 
 function eleminateEmotions(arr) {
     let emotionArray = [];
@@ -63,25 +63,27 @@ function getMatchingCatsArray () {
         })
         return getSelectedEmotionArray
     }
-    console.log(getSelectedEmotionArray)
-
+  
 }
 
-let sample = [1, 3, 34, 235,654, 76, 35, 66, 89]
-const passedsample = sample.filter((age) => {
-    let arrayitem = age >34
-    return arrayitem
-})
 
+function getSingleCatObject() {
+    const catsArray = getMatchingCatsArray()
+    if (catsArray.lenght === 1) {
+        return catsArray[0]
+    }
+    else {
+        let random = Math.floor(Math.random()*catsArray.length)
+        return catsArray[random]
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
+function renderCat() {
+    const catObject = getSingleCatObject()
+    const memeInner = `<img
+                        class="cat-img"
+                        src="/images/${catObject.image}
+                        alt=${catObject.alt.upperCase()}
+                        >`  
+                              
+}
